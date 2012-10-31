@@ -19,7 +19,9 @@
     "css-brunch": ">= 1.0 < 1.5",
     "uglify-js-brunch": ">= 1.0 < 1.5",
     "clean-css-brunch": ">= 1.0 < 1.5",
-    "ember-handlebars-brunch": "git://github.com/icholy/ember-handlebars-brunch.git"
+    "ember-handlebars-brunch": "git://github.com/icholy/ember-handlebars-brunch.git",
+    "auto-reload-brunch": "git+ssh://git@github.com:brunch/auto-reload-brunch.git",
+    "coffee-script-brunch": "git+ssh://git@github.com:brunch/coffee-script-brunch.git"
   },
   "devDependencies": {
     "mocha": "0.14.0",
