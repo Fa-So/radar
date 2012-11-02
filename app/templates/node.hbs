@@ -1,12 +1,12 @@
 {{#with controller}}
-<div>ID: {{id}}</div>
-<div>NAME:   {{name}}</div>
-<div>PARENT:  <a {{action showNode parent.id}}>{{parent.name}}</a> </div>
-<div>CHILDS: 
-{{#each child in childs}}
-  <div>
-    <a {{action showNode child.id}}>{{child.name}}</a>
-</div>
-{{/each}}
-</div>
+  <div>ID: {{id}}</div>
+  <div>NAME:   {{name}}</div>
+  <div>PARENT:  <a {{action showNode parent.id}}>{{parent.name}}</a> </div>
+  <div>CHILDS: 
+    {{#each child in childs}}
+      <div>
+        <a {{action showNode child.id}}>{{child.name}}</a>
+      </div>
+    {{/each}}
+  </div>
 {{/with}}
