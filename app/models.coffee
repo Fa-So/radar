@@ -1,6 +1,6 @@
 App = require 'app'
 
-delim = '-'
+nodeDelimiter = '-'
 
 App.Store = DS.Store.extend
   revision: 7
@@ -31,20 +31,20 @@ App.Node = DS.Model.extend
   parent: DS.belongsTo('App.Node')
   name: (() ->
     path = @get 'id'
-    parts = path.split delim
+    parts = path.split nodeDelimiter
     parts[parts.length-1] or 'ROOT').property('id')
 
 initFixture = () ->
   App.Node.FIXTURES = [{id: 'ROOT', childs: ['abc','def']},
-    {id: 'abc', childs: ['abc' + delim + 'blabla']},
-    {id: 'def', childs: ['def' + delim + 'hoho']},
-    {id: 'abc' + delim + 'blabla', childs: []},
-    {id: 'def' + delim + 'hoho', childs: []}]
+    {id: 'abc', childs: ['abc' + nodeDelimiter + 'blabla']},
+    {id: 'def', childs: ['def' + nodeDelimiter + 'hoho']},
+    {id: 'abc' + nodeDelimiter + 'blabla', childs: []},
+    {id: 'def' + nodeDelimiter + 'hoho', childs: []}]
 
   parentPath = (path) ->
-    parts = path.split delim    
+    parts = path.split nodeDelimiter    
     if parts.length > 1 
-      parent = parts[0..parts.length-2].join delim
+      parent = parts[0..parts.length-2].join nodeDelimiter
     else
       parent = 'ROOT'
               

@@ -5,16 +5,23 @@ App.Router = Em.Router.extend
   root: Em.Route.extend        
     index: Em.Route.extend
       route: '/'
-      connectOutlets: (router) ->
-        router.transitionTo 'node',App.Node.find('abc-blabla')
-        
+      redirectsTo: 'node.root'
+
     node: Em.Route.extend
-      route: '/:node_id'
-      connectOutlets: (router,node) ->
-        router.set('nodeController.content',node)
-        router.get('applicationController').connectOutlet('node')
+      route: '/node'
+
+      root: Em.Route.extend
+        route: '/'
+        connectOutlets: (router) ->
+          router.transitionTo 'node.id',App.Node.find('ROOT')
+        
+      id: Em.Route.extend
+        route: '/:node_id'
+        connectOutlets: (router,node) ->
+          router.set('nodeController.content',node)
+          router.get('applicationController').connectOutlet('node')
 
     showNode: (router,event) ->
       path = event.context
-      router.transitionTo('node',App.Node.find(path))
+      router.transitionTo('node.id',App.Node.find(path))
         
