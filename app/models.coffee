@@ -25,21 +25,39 @@ App.Store = DS.Store.extend
       console.log 'findByClientId',id
       @_super(type,id)
 
+DS.Adapter.registerTransform('JSON',
+  fromJSON: (serialized)->
+    serialized
+  toJSON: (deserialized)->
+    deserialized)
 
-App.Node = DS.Model.extend  
-  childs: DS.hasMany('App.Node')
-  parent: DS.belongsTo('App.Node')
+App.Node = DS.Model.extend
+  childNodes: DS.hasMany 'App.Node'
+  childStates: DS.hasMany 'App.State'
+  parent: DS.belongsTo 'App.Node'
   name: (() ->
     path = @get 'id'
     parts = path.split nodeDelimiter
-    parts[parts.length-1] or 'ROOT').property('id')
+    parts[parts.length-1] or 'ROOT').property 'id'
+
+App.State = DS.Model.extend
+  parent: DS.belongsTo 'App.Node'
+  name: (() ->
+    path = @get 'id'
+    parts = path.split nodeDelimiter
+    parts[parts.length-1] or 'ROOT').property 'id'
+  value: DS.attr 'JSON'
+  schema: DS.attr 'JSON'
 
 initFixture = () ->
-  App.Node.FIXTURES = [{id: 'ROOT', childs: ['abc','def']},
-    {id: 'abc', childs: ['abc' + nodeDelimiter + 'blabla']},
-    {id: 'def', childs: ['def' + nodeDelimiter + 'hoho']},
-    {id: 'abc' + nodeDelimiter + 'blabla', childs: []},
-    {id: 'def' + nodeDelimiter + 'hoho', childs: []}]
+  App.Node.FIXTURES = [{id: 'ROOT', childNodes: ['abc','def']},
+    {id: 'abc', childNodes: ['abc' + nodeDelimiter + 'blabla']},
+    {id: 'def', childNodes: ['def' + nodeDelimiter + 'hoho']},
+    {id: 'abc' + nodeDelimiter + 'blabla', childNodes: [], childStates: ['abc' + nodeDelimiter + 'blabla' + nodeDelimiter + 'testState']},
+    {id: 'def' + nodeDelimiter + 'hoho', childNodes: []}]
+
+  App.State.FIXTURES = [{id: 'abc' + nodeDelimiter + 'blabla' + nodeDelimiter + 'testState',
+  value: {a:123,b:444},schema:{}}]
 
   parentPath = (path) ->
     parts = path.split nodeDelimiter    
@@ -50,5 +68,9 @@ initFixture = () ->
               
   for fixture in App.Node.FIXTURES
     fixture.parent = parentPath fixture.id
+
+  for fixture in App.State.FIXTURES
+    fixture.parent = parentPath fixture.id
+
     
 initFixture()
