@@ -6,12 +6,12 @@
   "scripts": {
     "test": "standard && make build && mocha test/selenium.js",
     "gh-pages-travis": "gh-pages-travis",
-    "build": "rimraf ./prod/script.min.* && npm run build:browserify && npm run build:uglifyjs",
-    "build:browserify": "browserify ./js/src/index.js --outfile ./js/src/index.js.min.js -t babelify -t [envify]",
-    "build:uglifyjs": "uglifyjs js/src/index.js.min.js -c -m -o ./prod/script.min.js",
-    "react": "rimraf ./js/script.min.* && watchify --outfile ./debug/script.js -t babelify --verbose --debug ./js/src/index.js",
+    "build": "rimraf ./src/script.min.* && rimraf ./prod/script.min.* && npm run build:browserify && npm run build:uglifyjs",
+    "build:browserify": "browserify src/index.js -o src/index.min.js -t babelify -t [envify]",
+    "build:uglifyjs": "uglifyjs src/index.min.js -c -m -o ./prod/script.min.js",
+    "react": "rimraf ./src/script.min.* && watchify --outfile ./debug/script.js -t babelify --verbose --debug ./src/index.js",
     "server-debug": "http-server -p 6001 ./debug",
-    "server-release": "http-server -p 6002 ./prod"    
+    "server-release": "http-server -p 6002 ./prod"
   },
   "repository": {
     "type": "git",
