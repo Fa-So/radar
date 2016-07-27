@@ -5,7 +5,13 @@
   "main": "index.js",
   "scripts": {
     "test": "standard && make build && mocha test/selenium.js",
-    "gh-pages-travis": "gh-pages-travis"
+    "gh-pages-travis": "gh-pages-travis",
+    "build": "rimraf ./prod/script.min.* && npm run build:browserify && npm run build:uglifyjs",
+    "build:browserify": "browserify ./js/src/index.js --outfile ./js/src/index.js.min.js -t babelify -t [envify]",
+    "build:uglifyjs": "uglifyjs js/src/index.js.min.js -c -m -o ./prod/script.min.js",
+    "react": "rimraf ./js/script.min.* && watchify --outfile ./debug/script.js -t babelify --verbose --debug ./js/src/index.js",
+    "server-debug": "http-server -p 6001 ./debug",
+    "server-release": "http-server -p 6002 ./prod"    
   },
   "repository": {
     "type": "git",
@@ -54,6 +60,7 @@
     "standard": "^7.1.2",
     "standard-format": "^2.2.2",
     "uglify-js": "^2.4.23",
-    "watchify": "^3.2.1"
+    "watchify": "^3.2.1",
+    "http-server": "*"
   }
 }
