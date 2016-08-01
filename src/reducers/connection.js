@@ -1,8 +1,10 @@
+import * as connectionTypes from '../constants/ConnectionTypes'
+
 let connecting = false
 
-const connection = (state = {isConnected: false} , action) => {
+const connection = (state = {isConnected: false}, action) => {
   switch (action.type) {
-    case 'CONNECT_REQUEST':
+    case connectionTypes.CONNECT_REQUEST:
       connecting = true
       return {
         isConnected: false,
@@ -10,13 +12,13 @@ const connection = (state = {isConnected: false} , action) => {
         user: action.user,
         password: action.password
       }
-    case 'CONNECT_SUCCESS':
+    case connectionTypes.CONNECT_SUCCESS:
       connecting = false
       return {
         ...state,
         isConnected: true
       }
-    case 'CONNECT_FAILURE':
+    case connectionTypes.CONNECT_FAILURE:
       connecting = false
       return {
         isConnected: false,

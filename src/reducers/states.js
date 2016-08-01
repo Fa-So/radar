@@ -1,19 +1,23 @@
+import * as fetcherTypes from '../constants/FetcherTypes'
+import * as stateTypes from '../constants/StateTypes'
+import * as connectionTypes from '../constants/ConnectionTypes'
+
 let changing = {}
 
-const states = (state = {} , action) => {
+const states = (state = {}, action) => {
   switch (action.type) {
-    case 'FETCHER_FAILURE':
-    case 'CONNECT_REQUEST':
+    case fetcherTypes.FETCHER_FAILURE:
+    case connectionTypes.CONNECT_REQUEST:
       return []
-    case 'STATE_CHANGE':
+    case stateTypes.STATE_CHANGE:
       return action.states.filter((state) => {
         return typeof state.value !== 'undefined'
       })
-    case 'STATE_SET_REQUEST':
+    case stateTypes.STATE_SET_REQUEST:
       changing[action.path] = true
       return state
-    case 'STATE_SET_SUCCESS':
-    case 'STATE_SET_FAILURE':
+    case stateTypes.STATE_SET_SUCCESS:
+    case stateTypes.STATE_SET_FAILURE:
       delete changing[action.path]
       return state
     default:

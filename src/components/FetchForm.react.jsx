@@ -76,7 +76,7 @@ const FetchForm = ({fetchExpression, changeFetcher}) => {
               onSubmit={onSubmit}>
               <div className='row'>
                 <div className='input-field col active' style={inputFieldStyle}>
-                  <i className='prefix mdi-action-search' style={iconStyle}></i>
+                  <i className='prefix material-icons' style={iconStyle}>search</i>
                   <input
                     type='text'
                     id='containsAllOf'
@@ -93,7 +93,7 @@ const FetchForm = ({fetchExpression, changeFetcher}) => {
             </form>
             <ul id='nav-mobile' className='right'>
               <li>
-                <a href='#login' className='modal-trigger'><i className='mdi-action-account-child'></i></a>
+                <a href='#login' className='modal-trigger'><i className='material-icons'>account_box</i></a>
               </li>
             </ul>
           </div>

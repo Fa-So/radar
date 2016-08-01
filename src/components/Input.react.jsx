@@ -16,7 +16,7 @@ class Input extends React.Component {
     }
     return (
       <div className={'input-field col ' + className}>
-        <i className={'prefix ' + props.icon}></i>
+        <i className='prefix material-icons'>{props.icon}</i>
         <input
           id={props.id}
           type={props.type}

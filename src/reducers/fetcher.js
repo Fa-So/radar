@@ -1,16 +1,18 @@
+import * as fetcherTypes from '../constants/FetcherTypes'
+
 let changing = false
 
 const fetcher = (state = {}, action) => {
   switch (action.type) {
-    case 'FETCHER_REQUEST':
+    case fetcherTypes.FETCHER_REQUEST:
       changing = true
       return {
         expression: action.fetchExpression
       }
-    case 'FETCHER_SUCCESS':
+    case fetcherTypes.FETCHER_SUCCESS:
       changing = false
       return state
-    case 'FETCHER_FAILURE':
+    case fetcherTypes.FETCHER_FAILURE:
       changing = false
       return {
         ...state,

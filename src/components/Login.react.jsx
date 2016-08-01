@@ -34,7 +34,7 @@ const LoginForm = ({url, user, password, onSubmit}) => {
             label='Daemon Websocket URL'
             defaultValue={url}
             placeholder='ws://jetbus.io:8080'
-            icon='mdi-file-cloud'
+            icon='cloud'
             required
             autoFocus />
           <Input
@@ -44,15 +44,14 @@ const LoginForm = ({url, user, password, onSubmit}) => {
             label='User'
             value={user}
             placeholder='anonymous'
-            icon='mdi-action-account-box' />
+            icon='account_box' />
           <Input
             onChange={assignInput('password')}
             type='password'
             className='s12'
             label='Password'
             defaultValue={password}
-            icon='mdi-communication-vpn-key'
-            disabled={!inputs.user} />
+            icon='vpn_key' />
         </div>
       </div>
       <div className='modal-footer'>
@@ -75,6 +74,7 @@ class Login extends Component {
     const { connect, url, user, password } = this.props
     if (url) {
       connect({url, user, password})
+      $('#login').closeModal()
     }
     setTimeout(() => {
       if (!this.props.isConnected) {
