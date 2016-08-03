@@ -66,6 +66,7 @@ const LoginForm = ({url, user, password, onSubmit}) => {
 }
 
 LoginForm.propTypes = {
+  url: PropTypes.string.isRequired,
   onSubmit: PropTypes.func.isRequired
 }
 
@@ -74,7 +75,6 @@ class Login extends Component {
     const { connect, url, user, password } = this.props
     if (url) {
       connect({url, user, password})
-      $('#login').closeModal()
     }
     setTimeout(() => {
       if (!this.props.isConnected) {

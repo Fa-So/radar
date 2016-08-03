@@ -23,7 +23,7 @@ class Input extends React.Component {
           onChange={props.onChange}
           required={props.required}
           className={inputClassName}
-          value={props.value}
+          value={props.defaultValue}
           autoFocus={props.autoFocus}
           disabled={props.disabled} />
         <label htmlFor={props.id}>
